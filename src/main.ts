@@ -17,8 +17,8 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .addBearerAuth()
-    .setTitle('Lost Pets')
-    .setDescription('The Lost Pets API')
+    .setTitle('Found Lost Pets')
+    .setDescription('The Found Lost Pets API')
     .setVersion('1.0.0')
     .build();
 

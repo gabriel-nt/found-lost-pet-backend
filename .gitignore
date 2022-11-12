@@ -6,3 +6,5 @@ tmp/
 temp/
 
 .env
+dist
+data-source-prod.orm.ts
