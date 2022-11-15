@@ -1,5 +1,10 @@
 import { DisappearancesModule } from './domain/modules/disappearances/disappearances.module';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import {
+  MiddlewareConsumer,
+  Module,
+  NestModule,
+  RequestMethod,
+} from '@nestjs/common';
 
 import { AuthMiddleware } from './infra/middleware/auth.middleware';
 import { TypeOrmConfigModule } from './infra/config/typeorm/typeorm.module';
@@ -16,8 +21,28 @@ import { UsersModule } from './domain/modules/users/users.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer
-      .apply(AuthMiddleware)
-      .forRoutes('/users/*', '/comments', '/disappearances');
+    consumer.apply(AuthMiddleware).forRoutes(
+      '/users/*',
+      {
+        path: '/comments',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/comments',
+        method: RequestMethod.PUT,
+      },
+      {
+        path: '/disappearances',
+        method: RequestMethod.PUT,
+      },
+      {
+        path: '/disappearances',
+        method: RequestMethod.POST,
+      },
+      {
+        path: '/disappearances/my-disappearances',
+        method: RequestMethod.GET,
+      },
+    );
   }
 }
