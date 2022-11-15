@@ -1,4 +1,14 @@
-import { Body, Controller, HttpCode, Param, Post, Put } from '@nestjs/common';
+import { GetUserService } from './../../../services/getUser.service';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  Param,
+  Post,
+  Put,
+  Req,
+} from '@nestjs/common';
 
 import { User } from '../../typeorm/entities/user.entity';
 import { ICreateUserDTO } from '../../../dtos/ICreateUserDTO';
@@ -11,13 +21,27 @@ import {
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { Request } from 'express';
 
 @Controller('users')
 export class UsersController {
   constructor(
     private createUserService: CreateUserService,
     private updateUserService: UpdateUserService,
+    private getUserService: GetUserService,
   ) {}
+
+  @Get('/me')
+  @HttpCode(200)
+  @ApiTags('users')
+  @ApiCreatedResponse({
+    type: User,
+  })
+  async me(@Req() request: Request): Promise<User> {
+    const { id } = request.user;
+
+    return await this.getUserService.execute(id);
+  }
 
   @Post('/')
   @HttpCode(201)

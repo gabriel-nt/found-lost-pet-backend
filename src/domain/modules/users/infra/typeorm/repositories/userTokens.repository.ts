@@ -2,7 +2,7 @@ import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { UserTokens } from '../entities/usersTokens.entity';
+import { UserTokens } from '../entities/userTokens.entity';
 import { ICreateUserTokenDTO } from '../../../dtos/ICreateUserTokenDTO';
 import { IUsersTokensRepository } from '../../../repositories/IUsersTokensRepository';
 

@@ -1,6 +1,6 @@
 import { ICreateUserTokenDTO } from '../dtos/ICreateUserTokenDTO';
 
-import { UserTokens } from '../infra/typeorm/entities/usersTokens.entity';
+import { UserTokens } from '../infra/typeorm/entities/userTokens.entity';
 
 interface IUsersTokensRepository {
   createToken({

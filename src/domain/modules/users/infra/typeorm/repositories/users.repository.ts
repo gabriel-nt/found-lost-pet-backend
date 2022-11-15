@@ -19,6 +19,7 @@ export class UsersRepository implements IUsersRepository {
       where: {
         email,
       },
+      relations: ['address'],
     });
 
     return user;
@@ -29,6 +30,7 @@ export class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
+      relations: ['address'],
     });
 
     return user;
@@ -51,6 +53,7 @@ export class UsersRepository implements IUsersRepository {
       where: {
         id,
       },
+      relations: ['address'],
     });
 
     Object.assign(user, {

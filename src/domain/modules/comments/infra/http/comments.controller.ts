@@ -15,6 +15,7 @@ import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
@@ -41,6 +42,11 @@ export class CommentsController {
     schema: {
       items: { $ref: getSchemaPath(Comment) },
     },
+  })
+  @ApiQuery({
+    name: 'disappearanceId',
+    type: 'uuid',
+    required: false,
   })
   async list(
     @Query('disappearanceId') disappearanceId?: string,

@@ -12,7 +12,7 @@ export class UpdateCommentService {
     const findComment = await this.commentsRepository.findById(id);
 
     if (!findComment) {
-      throw new HttpException('Pet not found', 404);
+      throw new HttpException('Comment not found', 404);
     }
 
     const comment = await this.commentsRepository.updateComment(id, data);

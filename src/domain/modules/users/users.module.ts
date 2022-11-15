@@ -1,3 +1,10 @@
+import { GetUserService } from './services/getUser.service';
+import { AddressController } from './infra/http/controllers/address.controller';
+import { DeleteUserAddressService } from './services/deleteUserAddress.service';
+import { UpdateUserAddressService } from './services/updateUserAddress.service';
+import { CreateUserAddressService } from './services/createUserAddress.service';
+import { UsersAddressRepository } from './infra/typeorm/repositories/usersAdress.repository';
+import { UserAddress } from './infra/typeorm/entities/userAddress.entity';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -11,18 +18,26 @@ import { DateProviderModule } from '../../../infra/provider/DateProvider';
 import { AuthenticateController } from './infra/http/controllers/authenticate.controller';
 import { UserTokensRepository } from './infra/typeorm/repositories/userTokens.repository';
 import { UpdateUserService } from './services/updateUser.service';
-import { UserTokens } from './infra/typeorm/entities/usersTokens.entity';
+import { UserTokens } from './infra/typeorm/entities/userTokens.entity';
 
 @Module({
-  imports: [DateProviderModule, TypeOrmModule.forFeature([User, UserTokens])],
-  controllers: [UsersController, AuthenticateController],
+  imports: [
+    DateProviderModule,
+    TypeOrmModule.forFeature([User, UserTokens, UserAddress]),
+  ],
+  controllers: [UsersController, AuthenticateController, AddressController],
   providers: [
     UsersRepository,
+    GetUserService,
     CreateUserService,
     UpdateUserService,
     UserTokensRepository,
     AuthenticateUserService,
     RefreshTokenService,
+    UsersAddressRepository,
+    CreateUserAddressService,
+    UpdateUserAddressService,
+    DeleteUserAddressService,
   ],
 })
 export class UsersModule {}

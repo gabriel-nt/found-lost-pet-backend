@@ -1,7 +1,15 @@
+import { UserAddress } from './userAddress.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { randomUUID } from 'crypto';
 import { Exclude } from 'class-transformer';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryColumn,
+} from 'typeorm';
 
 @Entity('users')
 export class User {
@@ -21,6 +29,10 @@ export class User {
   @Column()
   @Exclude()
   password: string;
+
+  @ApiProperty({ type: () => UserAddress })
+  @OneToOne(() => UserAddress, (address) => address.user)
+  address: UserAddress;
 
   @ApiProperty()
   @CreateDateColumn()
