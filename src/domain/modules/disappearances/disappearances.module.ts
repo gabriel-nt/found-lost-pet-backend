@@ -8,6 +8,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Disappearance } from './infra/http/typeorm/entities/disappearance.entity';
 import { DisappearancesRepository } from './infra/http/typeorm/repositories/disappearances.repository';
+import { ListDisappearancesByUserService } from './services/listDisappearancesByUser.service';
 
 @Module({
   controllers: [DisappearancesController],
@@ -15,6 +16,7 @@ import { DisappearancesRepository } from './infra/http/typeorm/repositories/disa
   providers: [
     DisappearancesRepository,
     ListDisappearancesService,
+    ListDisappearancesByUserService,
     CreateDisappearanceService,
     UpdateDisappearanceService,
     DeleteDisappearanceService,

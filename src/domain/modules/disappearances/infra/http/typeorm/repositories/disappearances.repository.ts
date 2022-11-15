@@ -36,6 +36,31 @@ export class DisappearancesRepository implements IDisappearancesRepository {
     return disappearances;
   }
 
+  async findByUser({
+    type,
+    finalDate,
+    initialDate,
+    situation,
+    user_id,
+  }: IListDisappearancesParams & {
+    user_id: string;
+  }): Promise<Disappearance[]> {
+    const disappearances = await this.repository.find({
+      where: {
+        type,
+        situation,
+        user_id,
+        updated_at:
+          finalDate &&
+          initialDate &&
+          Between(new Date(finalDate), new Date(initialDate)),
+      },
+      relations: ['user'],
+    });
+
+    return disappearances;
+  }
+
   async findById(id: string): Promise<Disappearance> {
     const pet = await this.repository.findOne({
       where: {
@@ -65,6 +90,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
     situation,
     type,
     uf,
+    image,
     user_id,
   }: ICreateDisappearanceDTO): Promise<Disappearance> {
     const pet = this.repository.create({
@@ -77,6 +103,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       longitude,
       situation,
       user_id,
+      image,
     });
 
     await this.repository.save(pet);
@@ -96,6 +123,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       type,
       uf,
       user_id,
+      image,
     }: ICreateDisappearanceDTO,
   ): Promise<Disappearance> {
     const pet = await this.repository.findOne({
@@ -113,6 +141,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       situation,
       type,
       uf,
+      image,
       user_id,
     });
 

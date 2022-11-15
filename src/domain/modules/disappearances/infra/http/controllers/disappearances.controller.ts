@@ -21,18 +21,21 @@ import {
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
+  ApiQuery,
   ApiTags,
   getSchemaPath,
 } from '@nestjs/swagger';
 import { Disappearance } from '../typeorm/entities/disappearance.entity';
 import { IListDisappearancesParams } from '../../../dtos/IListDisappearancesParams';
 import { Request } from 'express';
+import { ListDisappearancesByUserService } from '../../../services/listDisappearancesByUser.service';
 
 @ApiBearerAuth()
 @Controller('disappearances')
 export class DisappearancesController {
   constructor(
     private listDisappearanceService: ListDisappearancesService,
+    private listDisappearanceByUserService: ListDisappearancesByUserService,
     private createDisappearanceService: CreateDisappearanceService,
     private updateDisappearanceService: UpdateDisappearanceService,
     private deleteDisappearanceService: DeleteDisappearanceService,
@@ -46,10 +49,72 @@ export class DisappearancesController {
       items: { $ref: getSchemaPath(Disappearance) },
     },
   })
+  @ApiQuery({
+    name: 'situation',
+    required: false,
+    enum: ['MISSING', 'FOUND', 'SIGHTED'],
+  })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'initialDate',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'finalDate',
+    required: false,
+    type: 'string',
+  })
   async list(
     @Query() params: IListDisappearancesParams,
   ): Promise<Disappearance[]> {
     const response = await this.listDisappearanceService.execute(params);
+
+    return response;
+  }
+
+  @Get('/my-disappearances')
+  @HttpCode(200)
+  @ApiTags('disappearances')
+  @ApiOkResponse({
+    schema: {
+      items: { $ref: getSchemaPath(Disappearance) },
+    },
+  })
+  @ApiQuery({
+    name: 'situation',
+    required: false,
+    enum: ['MISSING', 'FOUND', 'SIGHTED'],
+  })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'initialDate',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'finalDate',
+    required: false,
+    type: 'string',
+  })
+  async listByUser(
+    @Query() params: IListDisappearancesParams,
+    @Req() request: Request,
+  ): Promise<Disappearance[]> {
+    const { id: user_id } = request.user;
+
+    const response = await this.listDisappearanceByUserService.execute({
+      user_id,
+      ...params,
+    });
 
     return response;
   }

@@ -45,4 +45,8 @@ export class ICreateDisappearanceDTO {
   @IsString()
   @IsOptional()
   user_id: string;
+
+  @IsString()
+  @IsNotEmpty()
+  image: string;
 }

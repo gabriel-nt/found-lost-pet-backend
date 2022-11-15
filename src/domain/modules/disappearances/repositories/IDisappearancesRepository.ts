@@ -12,4 +12,9 @@ export interface IDisappearancesRepository {
   findAll(params: IListDisappearancesParams): Promise<Disappearance[]>;
   findByName(name: string): Promise<Disappearance>;
   deleteDisappearance(id: string): Promise<void>;
+  findByUser(
+    params: IListDisappearancesParams & {
+      user_id: string;
+    },
+  ): Promise<Disappearance[]>;
 }

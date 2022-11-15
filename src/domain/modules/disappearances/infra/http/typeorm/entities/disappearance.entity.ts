@@ -37,6 +37,10 @@ export class Disappearance {
 
   @Column()
   @ApiProperty()
+  image: string;
+
+  @Column()
+  @ApiProperty()
   latitude: number;
 
   @Column()
