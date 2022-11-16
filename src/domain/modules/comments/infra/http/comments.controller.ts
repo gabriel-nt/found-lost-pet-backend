@@ -25,7 +25,6 @@ import { ListCommentsService } from '../../services/listComments.service';
 import { UpdateCommentService } from '../../services/updateComment.service';
 import { DeleteCommentService } from '../../services/deleteComment.service';
 
-@ApiBearerAuth()
 @Controller('comments')
 export class CommentsController {
   constructor(
@@ -60,6 +59,7 @@ export class CommentsController {
 
   @Post('/')
   @HttpCode(201)
+  @ApiBearerAuth()
   @ApiTags('comments')
   @ApiCreatedResponse({
     description: 'The comment has been successfully created.',
@@ -73,6 +73,7 @@ export class CommentsController {
 
   @Put('/:id')
   @HttpCode(200)
+  @ApiBearerAuth()
   @ApiTags('comments')
   @ApiOkResponse({
     description: 'The comment has been successfully updated.',
@@ -89,6 +90,7 @@ export class CommentsController {
 
   @Delete('/:id')
   @HttpCode(204)
+  @ApiBearerAuth()
   @ApiTags('comments')
   @ApiNoContentResponse({
     description: 'The comment has been successfully deleted.',

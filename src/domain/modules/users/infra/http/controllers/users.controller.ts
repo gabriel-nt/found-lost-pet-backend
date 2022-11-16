@@ -33,6 +33,7 @@ export class UsersController {
 
   @Get('/me')
   @HttpCode(200)
+  @ApiBearerAuth()
   @ApiTags('users')
   @ApiCreatedResponse({
     type: User,

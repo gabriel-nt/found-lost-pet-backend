@@ -68,6 +68,7 @@ export class AddressController {
   @Delete('/:id')
   @HttpCode(204)
   @ApiTags('users')
+  @ApiBearerAuth()
   @ApiNoContentResponse({
     description: 'The user adddress has been successfully deleted.',
   })

@@ -30,7 +30,6 @@ import { IListDisappearancesParams } from '../../../dtos/IListDisappearancesPara
 import { Request } from 'express';
 import { ListDisappearancesByUserService } from '../../../services/listDisappearancesByUser.service';
 
-@ApiBearerAuth()
 @Controller('disappearances')
 export class DisappearancesController {
   constructor(
@@ -80,6 +79,7 @@ export class DisappearancesController {
   @Get('/my-disappearances')
   @HttpCode(200)
   @ApiTags('disappearances')
+  @ApiBearerAuth()
   @ApiOkResponse({
     schema: {
       items: { $ref: getSchemaPath(Disappearance) },
@@ -122,6 +122,7 @@ export class DisappearancesController {
   @Post('/')
   @HttpCode(201)
   @ApiTags('disappearances')
+  @ApiBearerAuth()
   @ApiCreatedResponse({
     description: 'The disappearance has been successfully created.',
     type: Disappearance,
@@ -142,6 +143,7 @@ export class DisappearancesController {
 
   @Put('/:id')
   @HttpCode(200)
+  @ApiBearerAuth()
   @ApiTags('disappearances')
   @ApiOkResponse({
     description: 'The disappearance has been successfully updated.',
@@ -164,6 +166,7 @@ export class DisappearancesController {
 
   @Delete('/:id')
   @HttpCode(204)
+  @ApiBearerAuth()
   @ApiTags('disappearances')
   @ApiNoContentResponse({
     description: 'The disappearance has been successfully deleted.',
