@@ -15,8 +15,8 @@ export class UpdateUserService {
       throw new HttpException('Profile not found', 404);
     }
 
-    const category = await this.usersRepository.updateUser(id, data);
+    const user = await this.usersRepository.updateUser(id, data);
 
-    return category;
+    return user;
   }
 }
