@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
@@ -65,6 +66,9 @@ export class CommentsController {
     description: 'The comment has been successfully created.',
     type: Comment,
   })
+  @ApiBody({
+    type: ICreateCommentDTO,
+  })
   async create(@Body() data: ICreateCommentDTO): Promise<Comment> {
     const response = await this.createCommentService.execute(data);
 
@@ -78,6 +82,9 @@ export class CommentsController {
   @ApiOkResponse({
     description: 'The comment has been successfully updated.',
     type: Comment,
+  })
+  @ApiBody({
+    type: ICreateCommentDTO,
   })
   async update(
     @Param('id') id: string,

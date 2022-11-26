@@ -10,7 +10,12 @@ import { User } from '../infra/typeorm/entities/user.entity';
 export class CreateUserService {
   constructor(private usersRepository: UsersRepository) {}
 
-  async execute({ email, name, password }: ICreateUserDTO): Promise<User> {
+  async execute({
+    email,
+    name,
+    password,
+    phone,
+  }: ICreateUserDTO): Promise<User> {
     const userAlreadyExists = await this.usersRepository.findByEmail(email);
 
     if (userAlreadyExists) {
@@ -22,6 +27,7 @@ export class CreateUserService {
     const user = await this.usersRepository.createUser({
       email,
       name,
+      phone,
       password: passwordHash,
     });
 

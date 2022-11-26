@@ -17,6 +17,7 @@ import { CreateUserService } from '../../../services/createUser.service';
 import { UpdateUserService } from '../../../services/updateUser.service';
 import {
   ApiBearerAuth,
+  ApiBody,
   ApiCreatedResponse,
   ApiOkResponse,
   ApiTags,
@@ -51,6 +52,9 @@ export class UsersController {
     type: User,
     description: 'The user has been successfully created.',
   })
+  @ApiBody({
+    type: ICreateUserDTO,
+  })
   async create(@Body() data: ICreateUserDTO): Promise<User> {
     return await this.createUserService.execute(data);
   }
@@ -62,6 +66,9 @@ export class UsersController {
   @ApiOkResponse({
     type: User,
     description: 'The user has been successfully updated.',
+  })
+  @ApiBody({
+    type: IUpdateUserDTO,
   })
   async update(
     @Param('id') id: string,

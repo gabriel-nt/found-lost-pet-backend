@@ -1,3 +1,4 @@
+import { GetDisappearanceService } from './../../../services/getDisappearance.service';
 import { DeleteDisappearanceService } from './../../../services/deleteDisappearance.service';
 import { UpdateDisappearanceService } from './../../../services/updateDisappearance.service';
 import { CreateDisappearanceService } from './../../../services/createDisappearanceService.service';
@@ -18,6 +19,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
@@ -33,12 +35,27 @@ import { ListDisappearancesByUserService } from '../../../services/listDisappear
 @Controller('disappearances')
 export class DisappearancesController {
   constructor(
+    private getDisappearanceService: GetDisappearanceService,
     private listDisappearanceService: ListDisappearancesService,
-    private listDisappearanceByUserService: ListDisappearancesByUserService,
     private createDisappearanceService: CreateDisappearanceService,
     private updateDisappearanceService: UpdateDisappearanceService,
     private deleteDisappearanceService: DeleteDisappearanceService,
+    private listDisappearanceByUserService: ListDisappearancesByUserService,
   ) {}
+
+  @Get('/:id')
+  @HttpCode(200)
+  @ApiTags('disappearances')
+  @ApiOkResponse({
+    schema: {
+      $ref: getSchemaPath(Disappearance),
+    },
+  })
+  async get(@Param('id') id: string): Promise<Disappearance> {
+    const response = await this.getDisappearanceService.execute(id);
+
+    return response;
+  }
 
   @Get('/')
   @HttpCode(200)
@@ -127,6 +144,9 @@ export class DisappearancesController {
     description: 'The disappearance has been successfully created.',
     type: Disappearance,
   })
+  @ApiBody({
+    type: ICreateDisappearanceDTO,
+  })
   async create(
     @Body() data: ICreateDisappearanceDTO,
     @Req() request: Request,
@@ -143,6 +163,9 @@ export class DisappearancesController {
 
   @Put('/:id')
   @HttpCode(200)
+  @ApiBody({
+    type: ICreateDisappearanceDTO,
+  })
   @ApiBearerAuth()
   @ApiTags('disappearances')
   @ApiOkResponse({

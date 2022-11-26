@@ -1,5 +1,10 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
-import { ApiBearerAuth, ApiNoContentResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiNoContentResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 
 import { IResetPasswordDTO } from './../../../dtos/IResetPasswordDTO';
 import { ResetPasswordService } from './../../../services/resetPassword.service';
@@ -12,6 +17,9 @@ export class PasswordController {
   @HttpCode(204)
   @ApiBearerAuth()
   @ApiTags('users')
+  @ApiBody({
+    type: IResetPasswordDTO,
+  })
   @ApiNoContentResponse()
   async resetPassword(@Body() data: IResetPasswordDTO): Promise<void> {
     await this.resetPasswordService.execute(data);

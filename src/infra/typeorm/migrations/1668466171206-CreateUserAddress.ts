@@ -23,37 +23,11 @@ export default class CreateUserAddress1668466171206
             type: 'uuid',
           },
           {
-            name: 'street',
-            type: 'varchar',
-          },
-          {
-            name: 'zipCode',
-            type: 'varchar',
-          },
-          {
-            name: 'number',
-            type: 'varchar',
-          },
-          {
-            name: 'district',
-            type: 'varchar',
-          },
-          {
-            name: 'complement',
-            type: 'varchar',
-            default: null,
-            isNullable: false,
-          },
-          {
-            name: 'neighborhood',
-            type: 'varchar',
-          },
-          {
             name: 'city',
             type: 'varchar',
           },
           {
-            name: 'state',
+            name: 'uf',
             type: 'varchar',
           },
           {

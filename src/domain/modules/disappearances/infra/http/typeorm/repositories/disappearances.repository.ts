@@ -62,23 +62,23 @@ export class DisappearancesRepository implements IDisappearancesRepository {
   }
 
   async findById(id: string): Promise<Disappearance> {
-    const pet = await this.repository.findOne({
+    const disappearance = await this.repository.findOne({
       where: {
         id,
       },
     });
 
-    return pet;
+    return disappearance;
   }
 
   async findByName(name: string): Promise<Disappearance> {
-    const pet = await this.repository.findOne({
+    const disappearance = await this.repository.findOne({
       where: {
         name,
       },
     });
 
-    return pet;
+    return disappearance;
   }
 
   async createDisappearance({
@@ -92,8 +92,10 @@ export class DisappearancesRepository implements IDisappearancesRepository {
     uf,
     image,
     user_id,
+    email,
+    phone,
   }: ICreateDisappearanceDTO): Promise<Disappearance> {
-    const pet = this.repository.create({
+    const disappearance = this.repository.create({
       city,
       description,
       name,
@@ -104,11 +106,13 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       situation,
       user_id,
       image,
+      email,
+      phone,
     });
 
-    await this.repository.save(pet);
+    await this.repository.save(disappearance);
 
-    return pet;
+    return disappearance;
   }
 
   async updateDisappearance(
@@ -126,13 +130,13 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       image,
     }: ICreateDisappearanceDTO,
   ): Promise<Disappearance> {
-    const pet = await this.repository.findOne({
+    const disappearance = await this.repository.findOne({
       where: {
         id,
       },
     });
 
-    Object.assign(pet, {
+    Object.assign(disappearance, {
       city,
       description,
       latitude,
@@ -145,9 +149,9 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       user_id,
     });
 
-    await this.repository.save(pet);
+    await this.repository.save(disappearance);
 
-    return pet;
+    return disappearance;
   }
 
   async deleteDisappearance(id: string): Promise<void> {

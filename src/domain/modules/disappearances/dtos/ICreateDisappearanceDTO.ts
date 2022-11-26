@@ -1,4 +1,4 @@
-import { ApiHeader, ApiProperty } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class ICreateDisappearanceDTO {
@@ -41,6 +41,16 @@ export class ICreateDisappearanceDTO {
   @IsNotEmpty()
   @ApiProperty()
   uf: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  email?: string;
+
+  @IsString()
+  @IsOptional()
+  @ApiProperty()
+  phone?: string;
 
   @IsString()
   @IsOptional()

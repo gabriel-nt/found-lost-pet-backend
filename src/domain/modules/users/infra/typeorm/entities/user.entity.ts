@@ -6,7 +6,6 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   OneToOne,
   PrimaryColumn,
 } from 'typeorm';
@@ -24,6 +23,10 @@ export class User {
   @ApiProperty()
   @Column()
   email: string;
+
+  @ApiProperty()
+  @Column()
+  phone?: string;
 
   @ApiProperty()
   @Column()

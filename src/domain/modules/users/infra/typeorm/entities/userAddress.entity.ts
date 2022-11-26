@@ -25,35 +25,11 @@ export class UserAddress {
 
   @ApiProperty()
   @Column()
-  street: string;
-
-  @ApiProperty()
-  @Column()
-  zipCode: string;
-
-  @ApiProperty()
-  @Column()
-  complement?: string;
-
-  @ApiProperty()
-  @Column()
-  district: string;
-
-  @ApiProperty()
-  @Column()
-  neighborhood: string;
-
-  @ApiProperty()
-  @Column()
-  number: string;
-
-  @ApiProperty()
-  @Column()
   city: string;
 
   @ApiProperty()
   @Column()
-  state: string;
+  uf: string;
 
   @ApiProperty()
   @Column()

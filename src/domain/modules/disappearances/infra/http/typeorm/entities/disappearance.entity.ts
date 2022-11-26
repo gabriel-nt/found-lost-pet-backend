@@ -49,6 +49,14 @@ export class Disappearance {
 
   @Column()
   @ApiProperty()
+  phone?: string;
+
+  @Column()
+  @ApiProperty()
+  email?: string;
+
+  @Column()
+  @ApiProperty()
   city: string;
 
   @Column()

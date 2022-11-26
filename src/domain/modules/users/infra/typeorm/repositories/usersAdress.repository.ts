@@ -1,11 +1,10 @@
-import { ICreateUserAddressDTO } from './../../../dtos/ICreateUserAddressDTO';
-
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { IUsersAddressRepository } from '../../../repositories/IUsersAddress';
 import { UserAddress } from '../entities/userAddress.entity';
+import { ICreateUserAddressDTO } from './../../../dtos/ICreateUserAddressDTO';
+import { IUsersAddressRepository } from '../../../repositories/IUsersAddress';
 
 @Injectable()
 export class UsersAddressRepository implements IUsersAddressRepository {
@@ -15,50 +14,38 @@ export class UsersAddressRepository implements IUsersAddressRepository {
   ) {}
 
   async findByUserId(user_id: string): Promise<UserAddress> {
-    const user = await this.repository.findOne({
+    const userAddress = await this.repository.findOne({
       where: {
         user_id,
       },
     });
 
-    return user;
+    return userAddress;
   }
 
   async findById(id: string): Promise<UserAddress> {
-    const user = await this.repository.findOne({
+    const userAddress = await this.repository.findOne({
       where: {
         id,
       },
     });
 
-    return user;
+    return userAddress;
   }
 
   async createUserAddress({
     city,
-    district,
-    neighborhood,
-    number,
-    state,
-    street,
-    zipCode,
     user_id,
     latitude,
     longitude,
-    complement,
+    uf,
   }: ICreateUserAddressDTO): Promise<UserAddress> {
     const userAddress = this.repository.create({
       city,
-      district,
-      neighborhood,
-      number,
-      state,
-      street,
-      zipCode,
       user_id,
       latitude,
       longitude,
-      complement,
+      uf,
     });
 
     await this.repository.save(userAddress);
@@ -68,19 +55,7 @@ export class UsersAddressRepository implements IUsersAddressRepository {
 
   async updateUserAddress(
     id: string,
-    {
-      city,
-      district,
-      neighborhood,
-      number,
-      state,
-      street,
-      zipCode,
-      user_id,
-      latitude,
-      longitude,
-      complement,
-    }: ICreateUserAddressDTO,
+    { city, user_id, latitude, longitude, uf }: ICreateUserAddressDTO,
   ): Promise<UserAddress> {
     const userAddress = await this.repository.findOne({
       where: {
@@ -90,16 +65,10 @@ export class UsersAddressRepository implements IUsersAddressRepository {
 
     Object.assign(userAddress, {
       city,
-      district,
-      neighborhood,
-      number,
-      state,
-      street,
-      zipCode,
+      uf,
       user_id,
       latitude,
       longitude,
-      complement,
     });
 
     await this.repository.save(userAddress);

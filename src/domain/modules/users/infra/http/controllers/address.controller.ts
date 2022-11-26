@@ -12,10 +12,12 @@ import {
 
 import {
   ApiBearerAuth,
+  ApiBody,
   ApiCreatedResponse,
   ApiNoContentResponse,
   ApiOkResponse,
   ApiTags,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { UserAddress } from '../../typeorm/entities/userAddress.entity';
 import { ICreateUserAddressDTO } from '../../../dtos/ICreateUserAddressDTO';
@@ -34,6 +36,9 @@ export class AddressController {
   @Post('/')
   @HttpCode(201)
   @ApiTags('users')
+  @ApiBody({
+    type: ICreateUserAddressDTO,
+  })
   @ApiCreatedResponse({
     type: UserAddress,
     description: 'The user address has been successfully created.',
@@ -45,6 +50,9 @@ export class AddressController {
   @Put('/:id')
   @HttpCode(200)
   @ApiBearerAuth()
+  @ApiBody({
+    type: ICreateUserAddressDTO,
+  })
   @ApiTags('users')
   @ApiOkResponse({
     type: UserAddress,
