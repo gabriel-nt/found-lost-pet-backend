@@ -68,10 +68,7 @@ class RefreshTokenService {
     return {
       refresh_token,
       token: newToken,
-      user: {
-        email: user.email,
-        name: user.name,
-      },
+      user,
     };
   }
 }

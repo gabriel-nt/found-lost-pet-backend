@@ -1,16 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-
-class AuthenticateUser {
-  @ApiProperty()
-  name: string;
-
-  @ApiProperty()
-  email: string;
-}
+import { User } from '../infra/typeorm/entities/user.entity';
 
 export class IAuthenticateUserResponse {
   @ApiProperty()
-  user: AuthenticateUser;
+  user: User;
 
   @ApiProperty()
   token: string;

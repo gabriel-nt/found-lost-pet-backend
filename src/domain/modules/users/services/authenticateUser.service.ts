@@ -23,6 +23,7 @@ class AuthenticateUserService {
     password,
   }: IAuthenticateUserDTO): Promise<IAuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email);
+
     const {
       secret_token,
       expires_in_token,
@@ -64,10 +65,7 @@ class AuthenticateUserService {
     return {
       token,
       refresh_token,
-      user: {
-        name: user.name,
-        email: user.email,
-      },
+      user,
     };
   }
 }
