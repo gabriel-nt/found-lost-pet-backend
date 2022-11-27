@@ -12,6 +12,7 @@ import {
 } from 'typeorm';
 import { Disappearance } from '../../../../disappearances/infra/http/typeorm/entities/disappearance.entity';
 import { User } from '../../../../users/infra/typeorm/entities/user.entity';
+import { Exclude } from 'class-transformer';
 
 @Entity('comments')
 export class Comment {
@@ -21,13 +22,10 @@ export class Comment {
 
   @Column()
   @ApiProperty()
-  title: string;
-
-  @Column()
-  @ApiProperty()
   description: string;
 
   @Column()
+  @Exclude()
   @ApiProperty()
   disappearance_id: string;
 
@@ -39,6 +37,7 @@ export class Comment {
   disappearance: Disappearance;
 
   @Column()
+  @Exclude()
   @ApiProperty()
   user_id: string;
 

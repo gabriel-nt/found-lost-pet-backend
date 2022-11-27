@@ -1,3 +1,4 @@
+import { DisappearancesModule } from './../disappearances/disappearances.module';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -12,7 +13,7 @@ import { CommentsRepository } from './infra/typeorm/repositories/comments.reposi
 
 @Module({
   controllers: [CommentsController],
-  imports: [TypeOrmModule.forFeature([Comment])],
+  imports: [DisappearancesModule, TypeOrmModule.forFeature([Comment])],
   providers: [
     CommentsRepository,
     ListCommentsService,

@@ -13,7 +13,12 @@ export class CommentsRepository implements ICommentsRepository {
   ) {}
 
   public async findAll(): Promise<Comment[]> {
-    const comments = await this.repository.find();
+    const comments = await this.repository.find({
+      order: {
+        created_at: 'DESC',
+      },
+      relations: ['disappearance'],
+    });
 
     return comments;
   }
@@ -23,6 +28,10 @@ export class CommentsRepository implements ICommentsRepository {
       where: {
         id,
       },
+      order: {
+        created_at: 'DESC',
+      },
+      relations: ['disappearance'],
     });
 
     return comment;
@@ -35,30 +44,32 @@ export class CommentsRepository implements ICommentsRepository {
       where: {
         disappearance_id: disappearanceId,
       },
+      relations: ['disappearance'],
     });
 
     return comment;
   }
 
-  public async findByTitle(title: string): Promise<Comment> {
+  public async findByDescription(description: string): Promise<Comment> {
     const comment = await this.repository.findOne({
       where: {
-        title,
+        description,
       },
+      relations: ['disappearance'],
     });
 
     return comment;
   }
 
   public async createComment({
-    title,
+    user_id,
     description,
-    disappearanceId,
+    disappearance_id,
   }: ICreateCommentDTO): Promise<Comment> {
     const comment = this.repository.create({
-      title,
+      user_id,
       description,
-      disappearance_id: disappearanceId,
+      disappearance_id,
     });
 
     await this.repository.save(comment);
@@ -68,7 +79,7 @@ export class CommentsRepository implements ICommentsRepository {
 
   public async updateComment(
     id: string,
-    { title, description, disappearanceId }: ICreateCommentDTO,
+    { description, disappearance_id, user_id }: ICreateCommentDTO,
   ): Promise<Comment> {
     const comment = await this.repository.findOne({
       where: {
@@ -77,9 +88,9 @@ export class CommentsRepository implements ICommentsRepository {
     });
 
     Object.assign(comment, {
-      title,
+      user_id,
       description,
-      disappearanceId,
+      disappearance_id,
     });
 
     await this.repository.save(comment);

@@ -9,6 +9,7 @@ import {
   Param,
   Delete,
   Query,
+  Req,
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
@@ -25,6 +26,7 @@ import { CreateCommentService } from '../../services/createCommentService.servic
 import { ListCommentsService } from '../../services/listComments.service';
 import { UpdateCommentService } from '../../services/updateComment.service';
 import { DeleteCommentService } from '../../services/deleteComment.service';
+import { Request } from 'express';
 
 @Controller('comments')
 export class CommentsController {
@@ -69,8 +71,16 @@ export class CommentsController {
   @ApiBody({
     type: ICreateCommentDTO,
   })
-  async create(@Body() data: ICreateCommentDTO): Promise<Comment> {
-    const response = await this.createCommentService.execute(data);
+  async create(
+    @Body() data: ICreateCommentDTO,
+    @Req() request: Request,
+  ): Promise<Comment> {
+    const { id: user_id } = request.user;
+
+    const response = await this.createCommentService.execute({
+      ...data,
+      user_id,
+    });
 
     return response;
   }
@@ -88,9 +98,15 @@ export class CommentsController {
   })
   async update(
     @Param('id') id: string,
+    @Req() request: Request,
     @Body() data: ICreateCommentDTO,
   ): Promise<Comment> {
-    const response = await this.updateCommentService.execute(id, data);
+    const { id: user_id } = request.user;
+
+    const response = await this.updateCommentService.execute(id, {
+      ...data,
+      user_id,
+    });
 
     return response;
   }

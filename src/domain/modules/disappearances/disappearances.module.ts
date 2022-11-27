@@ -23,5 +23,6 @@ import { GetDisappearanceService } from './services/getDisappearance.service';
     DeleteDisappearanceService,
     GetDisappearanceService,
   ],
+  exports: [DisappearancesRepository],
 })
 export class DisappearancesModule {}

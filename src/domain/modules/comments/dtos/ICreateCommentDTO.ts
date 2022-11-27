@@ -1,12 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class ICreateCommentDTO {
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  title: string;
-
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
@@ -15,5 +10,9 @@ export class ICreateCommentDTO {
   @IsString()
   @IsNotEmpty()
   @ApiProperty()
-  disappearanceId: string;
+  disappearance_id: string;
+
+  @IsString()
+  @IsOptional()
+  user_id: string;
 }

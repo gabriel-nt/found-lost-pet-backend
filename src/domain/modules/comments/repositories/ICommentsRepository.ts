@@ -5,7 +5,7 @@ export interface ICommentsRepository {
   findAll(): Promise<Comment[]>;
   findById(id: string): Promise<Comment>;
   deleteComment(id: string): Promise<void>;
-  findByTitle(title: string): Promise<Comment>;
+  findByDescription(description: string): Promise<Comment>;
   findByDisappearance(disappearanceId: string): Promise<Comment[]>;
   createComment(data: ICreateCommentDTO): Promise<Comment>;
   updateComment(id: string, data: ICreateCommentDTO): Promise<Comment>;
