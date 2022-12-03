@@ -66,6 +66,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       where: {
         id,
       },
+      relations: ['user'],
     });
 
     return disappearance;
@@ -76,6 +77,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       where: {
         name,
       },
+      relations: ['user'],
     });
 
     return disappearance;
@@ -134,6 +136,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       where: {
         id,
       },
+      relations: ['user'],
     });
 
     Object.assign(disappearance, {
