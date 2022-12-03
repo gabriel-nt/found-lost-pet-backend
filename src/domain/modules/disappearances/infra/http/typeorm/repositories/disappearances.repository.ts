@@ -31,6 +31,9 @@ export class DisappearancesRepository implements IDisappearancesRepository {
           initialDate &&
           Between(new Date(finalDate), new Date(initialDate)),
       },
+      order: {
+        updated_at: 'DESC',
+      },
       relations: ['user'],
       take: limit,
     });
