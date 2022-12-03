@@ -32,16 +32,16 @@ export class AppModule implements NestModule {
         method: RequestMethod.PUT,
       },
       {
+        path: '/disappearances/my-disappearances',
+        method: RequestMethod.GET,
+      },
+      {
         path: '/disappearances/*',
         method: RequestMethod.PUT,
       },
       {
         path: '/disappearances',
         method: RequestMethod.POST,
-      },
-      {
-        path: '/disappearances/my-disappearances',
-        method: RequestMethod.GET,
       },
     );
   }

@@ -43,6 +43,54 @@ export class DisappearancesController {
     private listDisappearanceByUserService: ListDisappearancesByUserService,
   ) {}
 
+  @Get('/my-disappearances')
+  @HttpCode(200)
+  @ApiTags('disappearances')
+  @ApiBearerAuth()
+  @ApiOkResponse({
+    schema: {
+      items: { $ref: getSchemaPath(Disappearance) },
+    },
+  })
+  @ApiQuery({
+    name: 'situation',
+    required: false,
+    enum: ['MISSING', 'FOUND', 'SIGHTED'],
+  })
+  @ApiQuery({
+    name: 'type',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'initialDate',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'finalDate',
+    required: false,
+    type: 'string',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: 'number',
+  })
+  async listByUser(
+    @Query() params: IListDisappearancesParams,
+    @Req() request: Request,
+  ): Promise<Disappearance[]> {
+    const { id: user_id } = request.user;
+
+    const response = await this.listDisappearanceByUserService.execute({
+      user_id,
+      ...params,
+    });
+
+    return response;
+  }
+
   @Get('/:id')
   @HttpCode(200)
   @ApiTags('disappearances')
@@ -89,54 +137,6 @@ export class DisappearancesController {
     @Query() params: IListDisappearancesParams,
   ): Promise<Disappearance[]> {
     const response = await this.listDisappearanceService.execute(params);
-
-    return response;
-  }
-
-  @Get('/my-disappearances')
-  @HttpCode(200)
-  @ApiTags('disappearances')
-  @ApiBearerAuth()
-  @ApiOkResponse({
-    schema: {
-      items: { $ref: getSchemaPath(Disappearance) },
-    },
-  })
-  @ApiQuery({
-    name: 'situation',
-    required: false,
-    enum: ['MISSING', 'FOUND', 'SIGHTED'],
-  })
-  @ApiQuery({
-    name: 'type',
-    required: false,
-    type: 'string',
-  })
-  @ApiQuery({
-    name: 'initialDate',
-    required: false,
-    type: 'string',
-  })
-  @ApiQuery({
-    name: 'finalDate',
-    required: false,
-    type: 'string',
-  })
-  @ApiQuery({
-    name: 'limit',
-    required: false,
-    type: 'number',
-  })
-  async listByUser(
-    @Query() params: IListDisappearancesParams,
-    @Req() request: Request,
-  ): Promise<Disappearance[]> {
-    const { id: user_id } = request.user;
-
-    const response = await this.listDisappearanceByUserService.execute({
-      user_id,
-      ...params,
-    });
 
     return response;
   }
