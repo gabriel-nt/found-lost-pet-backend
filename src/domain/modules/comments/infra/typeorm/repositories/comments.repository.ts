@@ -17,7 +17,7 @@ export class CommentsRepository implements ICommentsRepository {
       order: {
         created_at: 'DESC',
       },
-      relations: ['disappearance'],
+      relations: ['disappearance', 'user'],
     });
 
     return comments;
@@ -31,7 +31,7 @@ export class CommentsRepository implements ICommentsRepository {
       order: {
         created_at: 'DESC',
       },
-      relations: ['disappearance'],
+      relations: ['disappearance', 'user'],
     });
 
     return comment;
@@ -44,7 +44,7 @@ export class CommentsRepository implements ICommentsRepository {
       where: {
         disappearance_id: disappearanceId,
       },
-      relations: ['disappearance'],
+      relations: ['disappearance', 'user'],
     });
 
     return comment;
@@ -55,7 +55,7 @@ export class CommentsRepository implements ICommentsRepository {
       where: {
         description,
       },
-      relations: ['disappearance'],
+      relations: ['disappearance', 'user'],
     });
 
     return comment;
