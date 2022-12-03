@@ -28,11 +28,11 @@ export class AppModule implements NestModule {
         method: RequestMethod.POST,
       },
       {
-        path: '/comments',
+        path: '/comments/*',
         method: RequestMethod.PUT,
       },
       {
-        path: '/disappearances',
+        path: '/disappearances/*',
         method: RequestMethod.PUT,
       },
       {
