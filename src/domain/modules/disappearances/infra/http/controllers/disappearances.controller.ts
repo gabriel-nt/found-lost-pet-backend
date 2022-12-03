@@ -122,6 +122,11 @@ export class DisappearancesController {
     required: false,
     type: 'string',
   })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    type: 'number',
+  })
   async listByUser(
     @Query() params: IListDisappearancesParams,
     @Req() request: Request,
