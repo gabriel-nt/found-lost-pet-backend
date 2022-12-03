@@ -15,7 +15,7 @@ export class CommentsRepository implements ICommentsRepository {
   public async findAll(): Promise<Comment[]> {
     const comments = await this.repository.find({
       order: {
-        created_at: 'DESC',
+        updated_at: 'DESC',
       },
       relations: ['disappearance', 'user'],
     });
@@ -29,7 +29,7 @@ export class CommentsRepository implements ICommentsRepository {
         id,
       },
       order: {
-        created_at: 'DESC',
+        updated_at: 'DESC',
       },
       relations: ['disappearance', 'user'],
     });

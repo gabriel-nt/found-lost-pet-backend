@@ -20,6 +20,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
     finalDate,
     initialDate,
     situation,
+    limit,
   }: IListDisappearancesParams): Promise<Disappearance[]> {
     const disappearances = await this.repository.find({
       where: {
@@ -31,6 +32,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
           Between(new Date(finalDate), new Date(initialDate)),
       },
       relations: ['user'],
+      take: limit,
     });
 
     return disappearances;

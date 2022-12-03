@@ -3,4 +3,5 @@ export interface IListDisappearancesParams {
   type?: string;
   initialDate?: string;
   finalDate?: string;
+  limit?: number;
 }
