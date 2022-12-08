@@ -133,6 +133,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       situation,
       type,
       uf,
+      phone,
       user_id,
       image,
     }: ICreateDisappearanceDTO,
@@ -153,6 +154,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       situation,
       type,
       uf,
+      phone,
       image,
       user_id,
     });

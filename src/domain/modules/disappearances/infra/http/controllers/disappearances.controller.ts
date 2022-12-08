@@ -1,7 +1,7 @@
 import { GetDisappearanceService } from './../../../services/getDisappearance.service';
 import { DeleteDisappearanceService } from './../../../services/deleteDisappearance.service';
 import { UpdateDisappearanceService } from './../../../services/updateDisappearance.service';
-import { CreateDisappearanceService } from './../../../services/createDisappearanceService.service';
+import { CreateDisappearanceService } from './../../../services/createDisappearance.service';
 import { ListDisappearancesService } from './../../../services/listDisappearances.service';
 
 import { ICreateDisappearanceDTO } from '../../../dtos/ICreateDisappearanceDTO';

@@ -21,28 +21,34 @@ import { UsersModule } from './domain/modules/users/users.module';
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(AuthMiddleware).forRoutes(
-      '/users/*',
-      {
-        path: '/comments',
+    consumer
+      .apply(AuthMiddleware)
+      .exclude({
+        path: '/users/address',
         method: RequestMethod.POST,
-      },
-      {
-        path: '/comments/*',
-        method: RequestMethod.PUT,
-      },
-      {
-        path: '/disappearances/my-disappearances',
-        method: RequestMethod.GET,
-      },
-      {
-        path: '/disappearances/*',
-        method: RequestMethod.PUT,
-      },
-      {
-        path: '/disappearances',
-        method: RequestMethod.POST,
-      },
-    );
+      })
+      .forRoutes(
+        '/users/*',
+        {
+          path: '/comments',
+          method: RequestMethod.POST,
+        },
+        {
+          path: '/comments/*',
+          method: RequestMethod.PUT,
+        },
+        {
+          path: '/disappearances/my-disappearances',
+          method: RequestMethod.GET,
+        },
+        {
+          path: '/disappearances/*',
+          method: RequestMethod.PUT,
+        },
+        {
+          path: '/disappearances',
+          method: RequestMethod.POST,
+        },
+      );
   }
 }
