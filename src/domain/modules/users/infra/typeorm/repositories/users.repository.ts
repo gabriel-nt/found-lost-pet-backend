@@ -36,10 +36,16 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async createUser({ email, name, password }: ICreateUserDTO): Promise<User> {
+  async createUser({
+    email,
+    name,
+    password,
+    phone,
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       name,
       email,
+      phone,
       password,
     });
 
@@ -48,7 +54,10 @@ export class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async updateUser(id: string, { email, name }: IUpdateUserDTO): Promise<User> {
+  async updateUser(
+    id: string,
+    { email, name, phone }: IUpdateUserDTO,
+  ): Promise<User> {
     const user = await this.repository.findOne({
       where: {
         id,
@@ -59,6 +68,7 @@ export class UsersRepository implements IUsersRepository {
     Object.assign(user, {
       email,
       name,
+      phone,
     });
 
     await this.repository.save(user);

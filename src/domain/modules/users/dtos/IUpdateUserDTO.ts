@@ -11,4 +11,9 @@ export class IUpdateUserDTO {
   @IsNotEmpty()
   @ApiProperty()
   email: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  phone: string;
 }
