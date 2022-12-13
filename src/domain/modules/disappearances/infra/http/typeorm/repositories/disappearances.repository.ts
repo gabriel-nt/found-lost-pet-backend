@@ -136,6 +136,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       phone,
       user_id,
       image,
+      email,
     }: ICreateDisappearanceDTO,
   ): Promise<Disappearance> {
     const disappearance = await this.repository.findOne({
@@ -154,6 +155,7 @@ export class DisappearancesRepository implements IDisappearancesRepository {
       situation,
       type,
       uf,
+      email,
       phone,
       image,
       user_id,
