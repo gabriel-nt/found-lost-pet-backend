@@ -21,10 +21,12 @@ export class DisappearancesRepository implements IDisappearancesRepository {
     initialDate,
     situation,
     limit,
+    user_id,
   }: IListDisappearancesParams): Promise<Disappearance[]> {
     const disappearances = await this.repository.find({
       where: {
         type,
+        user_id,
         situation,
         updated_at:
           finalDate &&
