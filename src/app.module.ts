@@ -1,3 +1,4 @@
+import { WebsocketModule } from './domain/websocket/websocket.module';
 import { DisappearancesModule } from './domain/modules/disappearances/disappearances.module';
 import {
   MiddlewareConsumer,
@@ -17,6 +18,7 @@ import { UsersModule } from './domain/modules/users/users.module';
     UsersModule,
     DisappearancesModule,
     CommentsModule,
+    WebsocketModule,
   ],
 })
 export class AppModule implements NestModule {
