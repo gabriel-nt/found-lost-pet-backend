@@ -10,9 +10,7 @@ import { Server, Socket } from 'socket.io';
 import { WebsocketService } from './websocket.service';
 
 @WebSocketGateway({
-  cors: {
-    origin: `*`,
-  },
+  cors: true,
 })
 export class WebsocketGateway
   implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect
