@@ -1,24 +1,39 @@
-import { WebsocketModule } from './domain/websocket/websocket.module';
-import { DisappearancesModule } from './domain/modules/disappearances/disappearances.module';
 import {
-  MiddlewareConsumer,
   Module,
   NestModule,
   RequestMethod,
+  MiddlewareConsumer,
 } from '@nestjs/common';
 
-import { AuthMiddleware } from './infra/middleware/auth.middleware';
+import { UsersModule } from './infra/modules/users/users.module';
+import { JwtProviderModule } from './infra/providers/jwt-provider';
+import { AuthMiddleware } from './infra/middlewares/auth.middleware';
+import { CommentsModule } from './infra/modules/comments/comments.module';
+import { AuthConfigModule } from './infra/config/auth/auth-config.module';
+import { JwtProvider } from './infra/providers/jwt-provider/jwt.provider';
 import { TypeOrmConfigModule } from './infra/config/typeorm/typeorm.module';
-import { CommentsModule } from './domain/modules/comments/comments.module';
-import { UsersModule } from './domain/modules/users/users.module';
-
+import { AuthConfigService } from './infra/config/auth/auth-config.service';
+import { DisappearancesModule } from './infra/modules/disappearances/disappearances.module';
 @Module({
   imports: [
     TypeOrmConfigModule,
     UsersModule,
-    DisappearancesModule,
     CommentsModule,
-    WebsocketModule,
+    AuthConfigModule,
+    JwtProviderModule,
+    DisappearancesModule,
+  ],
+  providers: [
+    {
+      provide: 'JwtProvider',
+      inject: [],
+      useFactory: () => new JwtProvider(),
+    },
+    {
+      provide: 'AuthConfig',
+      inject: [],
+      useFactory: () => new AuthConfigService(),
+    },
   ],
 })
 export class AppModule implements NestModule {
