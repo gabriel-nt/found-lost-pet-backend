@@ -106,7 +106,8 @@ Esse projeto foi desenvolvido com o auxílio das seguintes libs:
 Para uma melhorar estrutura de projetos utilizamos das seguintes fundamentos:
 
 - DDD
-- SOLID
+- Solid
+- Clean Arch
 
 ###  📘 Padrão de Código
 
