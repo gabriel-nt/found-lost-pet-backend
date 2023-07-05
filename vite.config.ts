@@ -5,7 +5,7 @@ export default defineConfig({
     globals: true,
     coverage: {
       provider: 'istanbul',
-      reporter: ['lcov', 'cobertura'],
+      reporter: ['lcov', 'cobertura', 'text-summary', 'json-summary'],
     },
   },
 });
