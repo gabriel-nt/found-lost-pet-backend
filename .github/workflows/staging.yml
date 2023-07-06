@@ -41,7 +41,6 @@ jobs:
           thresholds: '60 80'
 
       - name: Get Coverage for badge
-        if: ${{ matrix.node-version == '16.x' }}
         run: |
           # var SUMMARY = [
           #   '',
@@ -74,7 +73,6 @@ jobs:
           echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
 
       - name: Create the Badge
-        if: ${{ matrix.node-version == '16.x' }}
         uses: schneegans/dynamic-badges-action@v1.0.0
         with:
           auth: ${{ secrets.GIST_SECRET }}
