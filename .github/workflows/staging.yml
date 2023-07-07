@@ -42,15 +42,9 @@ jobs:
 
       - name: Get Coverage for badge
         run: |
-          SUMMARY="$(yarn test | tail -2 | head -1)"
+          SUMMARY="$(yarn test | tail -3 | head -1)"
           TOKENS=($SUMMARY)
           echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
-          REF=${{ github.ref }}
-          echo "github.ref: $REF"
-          IFS='/' read -ra PATHS <<< "$REF"
-          BRANCH_NAME="${PATHS[1]}_${PATHS[2]}"
-          echo $BRANCH_NAME
-          echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
 
       - name: Create the Badge
         uses: schneegans/dynamic-badges-action@v1.0.0
@@ -62,6 +56,9 @@ jobs:
           message: ${{ env.COVERAGE }}
           color: green
           namedLogo: jest
+
+      - name: echo context
+        run: echo "$GITHUB_CONTEXT"
 
       - name: Deploy Coverage Report
         uses: peaceiris/actions-gh-pages@v3
