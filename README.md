@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/static/v1?label=node&message=16.15.1&color=green&logo=node.js" />
   <img src="https://img.shields.io/static/v1?label=typescript&message=4.0.3&color=blue&logo=typescript" />
   <img src="https://img.shields.io/badge/last%20commit-november-orange" />
-  <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gabriel-nt/dc97c81b0a2877c01f920096e6128928/raw/found-lost-pet-backend__heads_master.json" />
+  <img src="https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/gabriel-nt/dc97c81b0a2877c01f920096e6128928/raw/found-lost-pet-backend__master.json" />
   <img src="https://img.shields.io/badge/license-MIT-success"/>
 </p>
 
