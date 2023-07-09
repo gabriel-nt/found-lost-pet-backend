@@ -14,6 +14,7 @@ import { JwtProvider } from './infra/providers/jwt-provider/jwt.provider';
 import { TypeOrmConfigModule } from './infra/config/typeorm/typeorm.module';
 import { AuthConfigService } from './infra/config/auth/auth-config.service';
 import { DisappearancesModule } from './infra/modules/disappearances/disappearances.module';
+
 @Module({
   imports: [
     TypeOrmConfigModule,
@@ -26,12 +27,10 @@ import { DisappearancesModule } from './infra/modules/disappearances/disappearan
   providers: [
     {
       provide: 'JwtProvider',
-      inject: [],
       useFactory: () => new JwtProvider(),
     },
     {
       provide: 'AuthConfig',
-      inject: [],
       useFactory: () => new AuthConfigService(),
     },
   ],
