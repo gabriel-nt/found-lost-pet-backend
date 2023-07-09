@@ -32,11 +32,6 @@ jobs:
           echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
           echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
 
-  coverage:
-    runs-on: ubuntu-latest
-    needs: [test]
-
-    steps:
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
         with:
