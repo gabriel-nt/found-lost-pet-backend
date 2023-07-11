@@ -54,7 +54,7 @@ jobs:
   deploy_coverage:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event_name == 'push' && github.ref_name == master
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - name: Checkout
@@ -110,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     needs: [deploy_coverage]
-    if: github.event_name == 'push' && github.ref_name == master
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - run: |
