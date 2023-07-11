@@ -1,15 +1,21 @@
 name: Staging
 
 on:
+  push:
+    branches:
+      - master
+      - staging
+
   pull_request:
     branches:
       - master
+      - staging
     types: [opened, closed]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == false
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: Checkout
@@ -71,11 +77,12 @@ jobs:
           recreate: true
           path: code-coverage-results.md
 
-  deploy:
+  deploy_production:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event.pull_request.merged == true
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - run: |
-          echo The PR was merged ${{ github.event.pull_request }}
+          echo $github.ref_name 
+          echo "$GITHUB_CONTEXT"
