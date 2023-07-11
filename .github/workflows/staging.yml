@@ -4,11 +4,12 @@ on:
   pull_request:
     branches:
       - master
-    types: [closed]
+    types: [opened, closed]
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    if: github.event.pull_request.merged == false
 
     steps:
       - name: Checkout
@@ -76,4 +77,4 @@ jobs:
 
     steps:
       - run: |
-          echo The PR was merged ${{ github.event.pull_request.merged }}
+          echo The PR was merged ${{ github.event.pull_request }}
