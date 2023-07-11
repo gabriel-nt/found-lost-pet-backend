@@ -30,12 +30,7 @@ jobs:
         run: yarn install --frozen-lockfile
 
       - name: Unit Tests
-        run: |
-          BRANCH_NAME=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}
-          SUMMARY="$(yarn test | tail -3 | head -1)"
-          TOKENS=($SUMMARY)
-          echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
-          echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+        run: yarn test
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
