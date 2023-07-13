@@ -125,11 +125,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Echo secret
+        run: |
+          echo "${{ secrets.DOCKERHUB_USERNAME }}" 
+          echo "${{ secrets.DOCKERHUB_TOKEN }}"
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: backend/found_lost_pet:latest
+          tags: backend/found-lost-pet:latest
 
   deploy_production:
     runs-on: ubuntu-latest
