@@ -134,6 +134,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
+          provenance: false
           tags: gabrielnt/found-lost-pet-backend:latest
 
   deploy_production:
