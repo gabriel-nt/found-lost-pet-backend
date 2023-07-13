@@ -106,10 +106,35 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./coverage/lcov-report
 
-  deploy_production:
+  docker_production:
     runs-on: ubuntu-latest
     environment: production
     needs: [deploy_coverage]
+    if: github.event_name == 'push' && github.ref_name == 'master'
+
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Login to Docker Hub
+        uses: docker/setup-buildx-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: backend/found_lost_pet:latest
+
+  deploy_production:
+    runs-on: ubuntu-latest
+    environment: production
+    needs: [docker_production]
     if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:

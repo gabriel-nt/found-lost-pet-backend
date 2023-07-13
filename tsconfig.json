@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "lib": ["es2021", "dom"],
+    "lib": ["es2020"],
     "types": ["vitest/globals"],
     "target": "es5",
     "module": "commonjs",
