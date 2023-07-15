@@ -1,15 +1,19 @@
 name: Staging
 
 on:
+  push:
+    branches:
+      - master
+
   pull_request:
     branches:
       - master
-    types: [opened, closed]
+    types: [opened]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == false
+    if: github.event_name == 'pull_request'
 
     steps:
       - name: Checkout
@@ -48,7 +52,7 @@ jobs:
   deploy_coverage:
     runs-on: ubuntu-latest
     environment: production
-    if: github.event.pull_request.merged == true && github.ref_name == 'master'
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - name: Checkout
@@ -104,7 +108,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     needs: [deploy_coverage]
-    if: github.event.pull_request.merged == true && github.ref_name == 'master'
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - name: Set up QEMU
@@ -130,7 +134,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: production
     needs: [docker_production]
-    if: github.event.pull_request.merged == true && github.ref_name == 'master'
+    if: github.event_name == 'push' && github.ref_name == 'master'
 
     steps:
       - run: |
